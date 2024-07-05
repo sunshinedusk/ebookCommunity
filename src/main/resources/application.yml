@@ -1,0 +1,22 @@
+server:
+  port: 9000
+#数据库连接配置
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/ebookcommunity?serverTimezone=UTC
+      username: root
+      password: PYK031015
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 5000
+
+mybatis-plus:
+  global-config:
+    db-config:
+      #table-prefix: tb_		#设置表名通用前缀
+      id-type: auto		

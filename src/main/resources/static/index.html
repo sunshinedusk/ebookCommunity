@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/theme-chalk/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.14/index.js"></script>
+</head>
+<body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<div id="app">
+    <div v-if="userInfo">
+        <p>欢迎, {{ userInfo.username }}</p>
+        <p>ID: {{ userInfo.id }}</p>
+        <p>用户名: {{ userInfo.username }}</p>
+        <p>姓名: {{ userInfo.name }}</p>
+        <p>年龄: {{ userInfo.age }}</p>
+        <p>邮箱: {{ userInfo.email }}</p>
+        <el-button type="primary" @click="onLogout">退出登录</el-button>
+    </div>
+    <div v-else>
+        <p>加载中...</p>
+    </div>
+</div>
+
+<script>
+    const vue = Vue.createApp({
+        data() {
+            return {
+                userInfo: null
+            };
+        },
+        methods: {
+            fetchUserInfo() {
+                axios.get("/user/getSessionUser").then((res) => {
+                    this.userInfo = res.data;
+                }).catch((err) => {
+                    console.error(err);
+                });
+            },
+            onLogout() {
+                axios.post("/user/logout").then((res) => {
+                    if (res.data) {
+                        this.userInfo = null;
+                        window.location.href = '/login'; // 跳转到登录页面
+                    }
+                }).catch((err) => {
+                    console.error(err);
+                });
+            }
+        },
+        mounted() {
+            this.fetchUserInfo();
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
