@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Like {
+public class Support {
     private int id;     //点赞id
     private int uid;    //点赞者用户id
     private int cid;    //点赞的评论id

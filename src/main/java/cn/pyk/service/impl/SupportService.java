@@ -1,10 +1,10 @@
 package cn.pyk.service.impl;
 
 import cn.pyk.entity.Comment;
-import cn.pyk.entity.Like;
+import cn.pyk.entity.Support;
 import cn.pyk.mapper.CommentMapper;
-import cn.pyk.mapper.LikeMapper;
-import cn.pyk.service.ILikeService;
+import cn.pyk.mapper.SupportMapper;
+import cn.pyk.service.ISupportService;
 import cn.pyk.util.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-public class LikeService extends ServiceImpl<LikeMapper, Like> implements ILikeService {
+public class SupportService extends ServiceImpl<SupportMapper, Support> implements ISupportService {
     @Autowired
-    private LikeMapper likeMapper;
+    private SupportMapper supportMapper;
 
     @Autowired
     private CommentMapper commentMapper;
@@ -23,23 +23,23 @@ public class LikeService extends ServiceImpl<LikeMapper, Like> implements ILikeS
     // 点赞评论
     public Result<Boolean> likeComment(int uid, int cid) {
         // 查询是否已经点赞过
-        Like existLike = likeMapper.selectByUidAndCid(uid, cid);
-        if (existLike != null) {
+        Support existSupport = supportMapper.selectByUidAndCid(uid, cid);
+        if (existSupport != null) {
             return Result.error("500", "您已经点赞过该评论");
         }
 
         // 执行点赞操作
         Comment comment = commentMapper.selectById(cid);
         if (comment != null) {
-            comment.setLike(comment.getLike() + 1);
+            comment.setSupport(comment.getSupport() + 1);
             int result = commentMapper.updateById(comment);
             if (result > 0) {
                 // 记录点赞信息
-                Like newLike = new Like();
-                newLike.setUid(uid);
-                newLike.setCid(cid);
-                newLike.setTime(new Date()); // 设置当前时间
-                likeMapper.insert(newLike);
+                Support newSupport = new Support();
+                newSupport.setUid(uid);
+                newSupport.setCid(cid);
+                newSupport.setTime(new Date()); // 设置当前时间
+                supportMapper.insert(newSupport);
                 return Result.success(true, "点赞成功");
             }
         }
@@ -48,14 +48,14 @@ public class LikeService extends ServiceImpl<LikeMapper, Like> implements ILikeS
     }
 
     public Result<Boolean> unlikeComment(int uid, int cid) {
-        Like existingLike = likeMapper.selectByUidAndCid(uid, cid);
-        if (existingLike == null) {
+        Support existingSupport = supportMapper.selectByUidAndCid(uid, cid);
+        if (existingSupport == null) {
             return Result.error("400", "用户没有点赞过该评论");
         }
-        int rows = likeMapper.deleteById(existingLike.getId());
+        int rows = supportMapper.deleteById(existingSupport.getId());
         if (rows > 0) {
             Comment comment = commentMapper.selectById(cid);
-            comment.setLike(comment.getLike() - 1);
+            comment.setSupport(comment.getSupport() - 1);
             commentMapper.updateById(comment);
             return Result.success(true, "取消点赞成功");
         }

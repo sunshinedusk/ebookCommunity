@@ -11,7 +11,7 @@ public class Comment {
     private int uid;            //发布评论的用户号
     private int bid;            //评论的书号
     private String content;     //评论内容
-    private int like;           //点赞数
+    private int support;           //点赞数
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date time;          //发布评论的日期
@@ -48,12 +48,12 @@ public class Comment {
         this.content = content;
     }
 
-    public int getLike() {
-        return like;
+    public int getSupport() {
+        return support;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setSupport(int support) {
+        this.support = support;
     }
 
     public Date getTime() {

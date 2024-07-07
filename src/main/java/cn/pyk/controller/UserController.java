@@ -159,6 +159,7 @@ public class UserController {
         return Result.error("500","注册失败");
     }
 
+    @PostMapping("/changePwd")
     //用户修改密码
     public Result<Boolean> changePwd(@RequestParam String username,
                                      @RequestParam String oldPwd,

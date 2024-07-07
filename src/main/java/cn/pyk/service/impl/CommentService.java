@@ -39,7 +39,7 @@ public class CommentService extends ServiceImpl<CommentMapper, Comment> implemen
     public boolean likeComment(int id) {
         Comment comment = commentMapper.selectById(id);
         if (comment != null) {
-            comment.setLike(comment.getLike() + 1);
+            comment.setSupport(comment.getSupport() + 1);
             int result = commentMapper.updateById(comment);
             if (result > 0) {
                 return true;
@@ -51,7 +51,7 @@ public class CommentService extends ServiceImpl<CommentMapper, Comment> implemen
     // 查询某个书籍的评论（按点赞数排序）
     public List<Comment> getCommentsByBookId(int bid) {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("bid", bid).orderByDesc("like");
+        queryWrapper.eq("bid", bid).orderByDesc("support");
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         return comments;
     }
