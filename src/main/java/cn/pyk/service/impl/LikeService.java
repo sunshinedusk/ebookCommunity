@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class LikeService extends ServiceImpl<LikeMapper, Like> implements ILikeService {
     @Autowired
@@ -36,6 +38,7 @@ public class LikeService extends ServiceImpl<LikeMapper, Like> implements ILikeS
                 Like newLike = new Like();
                 newLike.setUid(uid);
                 newLike.setCid(cid);
+                newLike.setTime(new Date()); // 设置当前时间
                 likeMapper.insert(newLike);
                 return Result.success(true, "点赞成功");
             }

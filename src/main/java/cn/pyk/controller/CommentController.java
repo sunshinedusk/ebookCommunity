@@ -6,6 +6,7 @@ import cn.pyk.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,6 +18,7 @@ public class CommentController {
     // 发布评论
     @PostMapping("/add")
     public Result<Boolean> addComment(@RequestBody Comment comment) {
+        comment.setTime(new Date()); // 设置当前时间
         if(commentService.addComment(comment)){
             return Result.success(true,"评论发布成功");
         }

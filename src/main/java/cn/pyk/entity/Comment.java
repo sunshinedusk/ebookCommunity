@@ -1,6 +1,9 @@
 package cn.pyk.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class Comment {
@@ -9,7 +12,9 @@ public class Comment {
     private int bid;            //评论的书号
     private String content;     //评论内容
     private int like;           //点赞数
-    private Data time;          //发布评论的日期
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    private Date time;          //发布评论的日期
 
     public int getId() {
         return id;
@@ -51,11 +56,11 @@ public class Comment {
         this.like = like;
     }
 
-    public Data getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Data time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 }
