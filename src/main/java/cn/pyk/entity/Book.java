@@ -12,6 +12,7 @@ public class Book {
     private String press;   //出版社
     private String abs;     //书籍摘要
     private int cid;        //类别号
+    private int collect;    //收藏数
 
     public int getId() {
         return id;

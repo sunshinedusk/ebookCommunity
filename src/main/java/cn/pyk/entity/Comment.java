@@ -8,6 +8,7 @@ public class Comment {
     private int uid;            //发布评论的用户号
     private int bid;            //评论的书号
     private String content;     //评论内容
+    private int like;           //点赞数
 
     public int getId() {
         return id;
