@@ -9,6 +9,7 @@ public class User {
     private String password;    //密码
     private String avatar;      //头像
     private String email;       //邮箱
+    private int type;           //用户类型:1是管理员，2是普通用户
 
     public Integer getId() {
         return id;

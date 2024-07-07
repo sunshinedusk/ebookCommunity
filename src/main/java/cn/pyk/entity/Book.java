@@ -77,4 +77,12 @@ public class Book {
     public void setCid(int cid) {
         this.cid = cid;
     }
+
+    public int getCollect() {
+        return collect;
+    }
+
+    public void setCollect(int collect) {
+        this.collect = collect;
+    }
 }

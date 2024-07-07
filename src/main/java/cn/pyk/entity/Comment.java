@@ -9,6 +9,7 @@ public class Comment {
     private int bid;            //评论的书号
     private String content;     //评论内容
     private int like;           //点赞数
+    private Data time;          //发布评论的日期
 
     public int getId() {
         return id;
@@ -40,5 +41,21 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public Data getTime() {
+        return time;
+    }
+
+    public void setTime(Data time) {
+        this.time = time;
     }
 }

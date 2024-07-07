@@ -111,7 +111,7 @@ public class UserController {
 
     //用户登录
     @GetMapping("login")
-    public Result doLogin(@RequestParam String username,
+    public Result<User> doLogin(@RequestParam String username,
                            @RequestParam String password,
                            HttpServletResponse response){
         User user = userService.findUser(username,password);
@@ -125,7 +125,7 @@ public class UserController {
             cookie.setMaxAge(7*24*60*60); //七天过期
             cookie.setPath("/");
             response.addCookie(cookie);
-            return Result.success(true, "登录成功");
+            return Result.success(user, "登录成功");
         }else {
             return Result.error("400", "用户名或密码错误");
         }
