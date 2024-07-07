@@ -64,6 +64,11 @@ public class BookService extends ServiceImpl<BookMapper, Book> implements IBookS
         return books;
     }
 
+    //按书籍种类排前十榜单
+    public List<Book> getTop10BooksByCategory(int cid) {
+        return bookMapper.selectTop10BooksByCategory(cid);
+    }
+
     /*
     管理员功能
      */

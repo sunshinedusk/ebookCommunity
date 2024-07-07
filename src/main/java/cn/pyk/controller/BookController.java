@@ -86,6 +86,17 @@ public class BookController {
         return Result.success(books, "按收藏数排序查询前十书籍成功");
     }
 
+    @GetMapping("/top10-collect/{cid}")
+    public Result<List<Book>> getTop10BooksByCategory(@PathVariable("cid") int cid) {
+        List<Book> books = bookService.getTop10BooksByCategory(cid);
+        if (books.isEmpty()) {
+            return Result.error("400", "无书籍信息!");
+        }
+        return Result.success(books, "按类别和收藏数排序查询前十书籍成功");
+    }
+
+
+
     /*
     管理员操作:
         新增书籍
