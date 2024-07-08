@@ -29,8 +29,9 @@ public class SupportService extends ServiceImpl<SupportMapper, Support> implemen
         }
 
         // 执行点赞操作
-        Comment comment = commentMapper.selectById(cid);
+        Comment comment = commentMapper.selectById(cid);    //查询是否存在评论
         if (comment != null) {
+            //评论的点赞数+1
             comment.setSupport(comment.getSupport() + 1);
             int result = commentMapper.updateById(comment);
             if (result > 0) {
@@ -54,6 +55,7 @@ public class SupportService extends ServiceImpl<SupportMapper, Support> implemen
         }
         int rows = supportMapper.deleteById(existingSupport.getId());
         if (rows > 0) {
+            //评论的点赞数-1
             Comment comment = commentMapper.selectById(cid);
             comment.setSupport(comment.getSupport() - 1);
             commentMapper.updateById(comment);

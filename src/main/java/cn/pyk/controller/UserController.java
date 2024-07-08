@@ -113,8 +113,13 @@ public class UserController {
     @GetMapping("login")
     public Result<User> doLogin(@RequestParam String username,
                            @RequestParam String password,
+                           @RequestParam int type,
                            HttpServletResponse response){
         User user = userService.findUser(username,password);
+        //查询用户权限是否与请求的匹配
+        if(user.getType() != type)  {
+            return Result.error("400","您无该权限,请重新选择!");
+        }
         if(user != null && !user.getUsername().isEmpty()){
             //生成唯一会话ID
             String token = UUID.randomUUID().toString();
