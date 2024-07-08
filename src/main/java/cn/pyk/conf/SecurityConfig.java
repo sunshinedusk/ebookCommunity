@@ -1,4 +1,4 @@
-package cn.pyk.config;
+package cn.pyk.conf;
 
 import cn.pyk.filter.JwtAuthenticationFilter;
 import cn.pyk.service.impl.UserService;
