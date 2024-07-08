@@ -95,7 +95,15 @@ public class BookController {
         return Result.success(books, "按类别和收藏数排序查询前十书籍成功");
     }
 
-
+    //通过书籍id查询书籍信息
+    @GetMapping("/getBookById")
+    public Result<Book> getBookById(@RequestParam int id){
+        Book book = bookService.getById(id);
+        if (book != null) {
+            return Result.success(book,"查询成功!");
+        }
+        return Result.error("400","无此书信息!");
+    }
 
     /*
     管理员操作:

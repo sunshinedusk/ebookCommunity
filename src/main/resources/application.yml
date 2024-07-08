@@ -23,3 +23,7 @@ mybatis-plus:
 
 upload:
   path: D:/img
+
+jwt:
+  secret: yourSecretKey
+  expiration: 604800  # 7 days in seconds
